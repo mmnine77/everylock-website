@@ -1,192 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EveryLock</title>
-  <meta
-    name="description"
-    content="EveryLock is a privacy-focused Android vault for protecting photos, videos, and selected apps."
-  />
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #08101d;
-      color: #f5f7fa;
-      line-height: 1.6;
-    }
-
-    .container {
-      width: min(900px, 90%);
-      margin: auto;
-    }
-
-    header {
-      padding: 80px 0 50px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #aab7c8;
-      font-size: 19px;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: #132b45;
-      color: #45bfff;
-    }
-
-    section {
-      padding: 35px 0;
-    }
-
-    h2 {
-      color: #45bfff;
-    }
-
-    .card {
-      background: #101a29;
-      border: 1px solid #1c2d42;
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 18px;
-    }
-
-    a {
-      color: #45bfff;
-    }
-
-    footer {
-      border-top: 1px solid #1c2d42;
-      margin-top: 40px;
-      padding: 30px 0;
-      text-align: center;
-      color: #8998aa;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EveryLock — Private Vault & App Protection</title>
+<meta name="description" content="EveryLock is an Android privacy app for protecting private photos and videos, locking selected apps, and creating encrypted recovery backups in the user's Google Drive app data storage.">
+<style>
+:root{
+  --bg:#07111f;--bg2:#0b1729;--card:#0e1d31;--line:#223551;
+  --text:#f5f8ff;--muted:#aebbd0;--blue:#4aa8ff;--cyan:#53e4ff;--green:#63e6a6;
+  --max:1120px
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+background:radial-gradient(circle at 80% 0%,#12335a 0,transparent 35%),linear-gradient(180deg,var(--bg),#050b14 70%);
+color:var(--text);line-height:1.65}
+a{color:#80c8ff;text-decoration:none} a:hover{text-decoration:underline}
+.wrap{width:min(var(--max),calc(100% - 40px));margin:auto}
+nav{position:sticky;top:0;z-index:10;background:rgba(7,17,31,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.navin{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:1.25rem;letter-spacing:.2px;color:white}
+.navlinks{display:flex;gap:22px;font-size:.95rem}
+.hero{padding:92px 0 72px}
+.badge{display:inline-flex;padding:7px 12px;border:1px solid #28507a;border-radius:999px;color:#bfe4ff;background:#0d2238;font-size:.85rem}
+h1{font-size:clamp(2.5rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.05em;margin:22px 0}
+.gradient{background:linear-gradient(90deg,#fff,#6bdcff);-webkit-background-clip:text;color:transparent}
+.lead{max-width:760px;color:var(--muted);font-size:1.18rem}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;padding:12px 18px;border-radius:12px;border:1px solid #31547a;background:#102844;color:white;font-weight:700}
+.btn.primary{background:linear-gradient(135deg,#178bff,#28c9ef);border:0;color:#03101d}
+section{padding:32px 0 70px}
+h2{font-size:2rem;margin:0 0 12px;letter-spacing:-.02em}
+.sub{color:var(--muted);max-width:780px;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:linear-gradient(180deg,rgba(16,36,61,.9),rgba(10,23,40,.9));border:1px solid var(--line);border-radius:18px;padding:24px}
+.card h3{margin:8px 0 8px}.card p{color:var(--muted);margin:0}
+.icon{font-size:1.6rem}
+.callout{border:1px solid #245277;background:#0a2035;border-radius:18px;padding:24px}
+.kicker{font-size:.8rem;text-transform:uppercase;letter-spacing:.12em;color:var(--cyan);font-weight:800}
+footer{border-top:1px solid rgba(255,255,255,.08);padding:30px 0 50px;color:var(--muted);font-size:.92rem}
+.footerin{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.policy{max-width:860px;margin:auto;padding:70px 0}
+.policy h1{font-size:clamp(2.4rem,6vw,4rem)}
+.policy h2{font-size:1.45rem;margin-top:38px}
+.policy h3{margin-top:25px}
+.policy p,.policy li{color:#c0cada}
+.policy strong{color:white}
+.notice{padding:16px 18px;border-left:3px solid var(--cyan);background:#0c1d30;border-radius:8px;color:#dceaff}
+table{width:100%;border-collapse:collapse;margin:20px 0}
+th,td{text-align:left;vertical-align:top;padding:13px;border-bottom:1px solid var(--line);color:#c0cada}
+th{color:white}
+@media(max-width:800px){.grid{grid-template-columns:1fr}.navlinks{gap:12px}.hero{padding-top:60px}}
+</style>
 </head>
-
 <body>
-  <header class="container">
-    <h1>EveryLock</h1>
-    <p class="subtitle">
-      Private protection for your photos, videos, and apps.
-    </p>
+<nav><div class="wrap navin"><a class="brand" href="./">EveryLock</a>
+<div class="navlinks"><a href="#features">Features</a><a href="#google-drive">Google Drive</a><a href="privacy.html">Privacy</a></div></div></nav>
 
-    <div class="badge">Privacy-focused Android app</div>
-  </header>
+<header class="hero"><div class="wrap">
+<span class="badge">Android privacy & security</span>
+<h1>Keep your private content<br><span class="gradient">under your control.</span></h1>
+<p class="lead">EveryLock is an Android privacy app that provides an encrypted local vault for private photos and videos, optional protection for selected apps, PIN and biometric access, and optional encrypted recovery backup to your own Google Drive app data storage.</p>
+<div class="actions"><a class="btn primary" href="#features">Explore EveryLock</a><a class="btn" href="privacy.html">Read Privacy Policy</a></div>
+</div></header>
 
-  <main class="container">
+<main>
+<section id="features"><div class="wrap">
+<div class="kicker">Core functionality</div><h2>Privacy-focused by design</h2>
+<p class="sub">The app is designed around local protection first. Cloud access is optional and is used only when you choose to connect Google Drive for encrypted backup and recovery.</p>
+<div class="grid">
+<div class="card"><div class="icon">🔐</div><h3>Encrypted private vault</h3><p>Import private photos and videos into app-private storage protected by authenticated encryption and your vault security controls.</p></div>
+<div class="card"><div class="icon">🛡️</div><h3>App protection</h3><p>Optionally protect selected Android apps with a lock overlay. The accessibility service is configured only for window-state detection and cannot retrieve window content.</p></div>
+<div class="card"><div class="icon">👆</div><h3>PIN & biometrics</h3><p>Use a six-digit PIN for vault access and, when enabled and supported by the device, Android biometric authentication for convenient unlocking.</p></div>
+<div class="card"><div class="icon">📷</div><h3>Photo & video privacy</h3><p>Manage protected media inside the vault and export selected items back to Android media storage when you choose.</p></div>
+<div class="card"><div class="icon">☁️</div><h3>Encrypted recovery backup</h3><p>Create encrypted backup generations for recovery. Backup media remains encrypted before it is uploaded.</p></div>
+<div class="card"><div class="icon">🔑</div><h3>Recovery password</h3><p>Your recovery password protects the cryptographic recovery envelope. EveryLock does not store the recovery password itself.</p></div>
+</div></div></section>
 
-    <section>
-      <h2>About EveryLock</h2>
+<section id="google-drive"><div class="wrap">
+<div class="callout">
+<div class="kicker">Why EveryLock requests Google access</div>
+<h2>Google Drive is used only for optional encrypted backup and restore.</h2>
+<p>When you explicitly connect a Google account, EveryLock requests the narrow <strong>Google Drive app data</strong> permission (<code>https://www.googleapis.com/auth/drive.appdata</code>). The app uses this permission to create, list, update, download, and delete EveryLock's own backup files in Google Drive's private <strong>appDataFolder</strong>. It does not request general access to your My Drive files.</p>
+<p>The connected Google account email may be stored locally on your device so the app can show which account is connected. Backup content uploaded by EveryLock is encrypted. Google account authorization alone is not the recovery password for your encrypted vault backup.</p>
+<p><a href="privacy.html#google-user-data">See exactly how Google user data is handled →</a></p>
+</div></div></section>
 
-      <div class="card">
-        <p>
-          EveryLock is an Android privacy application designed to protect
-          personal photos, videos, and selected apps.
-        </p>
+<section><div class="wrap">
+<div class="kicker">Transparency</div><h2>Security permissions are purpose-limited</h2>
+<p class="sub">EveryLock may use Android biometric authentication, Usage Access, an Accessibility Service, notifications, network access, and boot-completed handling where required for features you enable. The Accessibility Service is configured with <strong>canRetrieveWindowContent=false</strong> and is used to detect protected app launches and show the lock overlay; it is not designed to read screen text or passwords.</p>
+</div></section>
+</main>
 
-        <p>
-          Vault media is stored in encrypted form on the user's device.
-          EveryLock also supports encrypted recovery backups using the user's
-          own Google Drive account.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Key Features</h2>
-
-      <div class="card">
-        <p>🔐 PIN and biometric protection</p>
-        <p>🖼️ Encrypted photo vault</p>
-        <p>🎬 Encrypted video vault</p>
-        <p>📱 Optional app locking</p>
-        <p>☁️ Encrypted Google Drive recovery backup</p>
-        <p>🔒 AES-256 authenticated encryption</p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Google Drive Backup</h2>
-
-      <div class="card">
-        <p>
-          EveryLock uses Google Drive only when the user chooses to connect
-          their Google account for encrypted backup and recovery.
-        </p>
-
-        <p>
-          The app requests access only to its private Google Drive
-          <strong>appDataFolder</strong>.
-        </p>
-
-        <p>
-          EveryLock does not request access to browse, read, or modify the
-          user's normal Google Drive files.
-        </p>
-
-        <p>
-          Backup media is encrypted before being stored in Google Drive.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Privacy</h2>
-
-      <div class="card">
-        <p>
-          Privacy and security are core parts of EveryLock's design.
-        </p>
-
-        <p>
-          Read the full
-          <a href="privacy.html">EveryLock Privacy Policy</a>.
-        </p>
-      </div>
-    </section>
-
-    <section>
-      <h2>Support</h2>
-
-      <div class="card">
-        <p>
-          Questions or support requests:
-        </p>
-
-        <p>
-          Email:
-          <a href="mailto:support@example.com">
-            support@example.com
-          </a>
-        </p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <div class="container">
-      © 2026 EveryLock. All rights reserved.
-    </div>
-  </footer>
-</body>
-</html>
+<footer><div class="wrap footerin"><div>© 2026 EveryLock. All rights reserved.</div>
+<div><a href="./">Home</a> · <a href="privacy.html">Privacy Policy</a></div></div></footer>
+</body></html>
